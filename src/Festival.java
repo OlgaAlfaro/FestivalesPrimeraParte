@@ -59,8 +59,13 @@ public class Festival {
      *
      */
     public Mes getMes() {
-        //TODO
-        
+
+        int mesnum = fechaInicio.getMonthValue();
+        for(Mes mimes: Mes.values()){
+            if(mimes.ordinal() == mesnum-1){
+                return mimes;
+            }
+        }
         return null;
         
     }
@@ -72,9 +77,8 @@ public class Festival {
      * en un fecha anterior a otro
      */
     public boolean empiezaAntesQue(Festival otro) {
-        //TODO
-        
-        return true;
+
+        return fechaInicio.isBefore(otro.getFechaInicio());
         
     }
 
@@ -85,9 +89,8 @@ public class Festival {
      * en un fecha posteior a otro
      */
     public boolean empiezaDespuesQue(Festival otro) {
-        //TODO
-        
-        return true;
+
+        return fechaInicio.isAfter(otro.getFechaInicio());
         
     }
 
@@ -96,9 +99,13 @@ public class Festival {
      * @return true si el festival ya ha concluido
      */
     public boolean haConcluido() {
-        //TODO
-        
-        return true;
+
+        if(fechaInicio.plusDays(duracion-1).isAfter(LocalDate.now())){
+            return true;
+        }
+        else{
+            return false;
+        }
 
     }
 
