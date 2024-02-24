@@ -1,7 +1,5 @@
 
-
 import java.time.LocalDate;
-import java.time.Month;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Scanner;
@@ -40,23 +38,27 @@ public class FestivalesIO {
      * @return el festival creado
      */
     public static Festival parsearLinea(String lineaFestival) {
-       //TODO
-        String[] tokens = lineaFestival.split(":");
-        String nom = tokens[0];
-        String lug = tokens[1];
 
-        String[] fecha = tokens[2].split("-");
+        String[] tokens = lineaFestival.split(":");
+        String nom = tokens[0].trim();
+        nom.toUpperCase().charAt(0);
+        int pos = nom.indexOf(" ");
+        nom.toUpperCase().charAt(pos);
+
+        String lug = tokens[1].trim().toUpperCase();
+
+        String[] fecha = tokens[2].trim().split("-");
         Integer anio = Integer.valueOf(fecha[2]);
         Integer mes = Integer.valueOf(fecha[1]);
         Integer dia = Integer.valueOf(fecha[0]);
         LocalDate fechaIn = LocalDate.of(anio, mes, dia);
 
-        Integer durac = Integer.valueOf(tokens[3]);
+        Integer durac = Integer.valueOf(tokens[3].trim());
 
         HashSet<Estilo> estil = new HashSet<>();
         int i = 4;
         while(i<tokens.length){
-            estil.add(Estilo.valueOf(tokens[i]));
+            estil.add(Estilo.valueOf(tokens[i].trim()));
             i++;
         }
         Festival mifest = new Festival(nom, lug, fechaIn, durac, estil);
