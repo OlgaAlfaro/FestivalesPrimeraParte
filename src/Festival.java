@@ -1,6 +1,9 @@
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.HashSet;
+
+import static java.time.temporal.ChronoUnit.DAYS;
 
 /**
  * Un objeto de esta clase almacena los datos de un
@@ -117,8 +120,31 @@ public class Festival {
     @Override
     public String toString() {
        //TODO
-        
-        return null;
+        StringBuilder sb = new StringBuilder();
+
+        DateTimeFormatter formateador = DateTimeFormatter.ofPattern("dd MMM yyyy");
+
+        sb.append(nombre + "\t\t\t" + estilos
+                + "\n" + lugar
+                + "\n" + fechaInicio.format(formateador));
+        if(duracion > 1){
+            sb.append(" - " + fechaInicio.plusDays(duracion).format(formateador));
+        }
+
+        LocalDate hoy = LocalDate.now();
+        if(!haConcluido()){
+            sb.append("(quedan " + DAYS.between(fechaInicio, hoy) + " días)");
+        }
+        else if(hoy.isEqual(fechaInicio)){
+            sb.append("(ON)");
+        }
+        else{
+            sb.append("(concluido)");
+        }
+
+        sb.append("\n-----------------------------------");
+
+        return sb.toString();
         
     }
 

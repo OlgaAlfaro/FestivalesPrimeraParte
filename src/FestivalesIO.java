@@ -21,14 +21,14 @@ public class FestivalesIO {
                 String lineaFestival = sc.nextLine();
                 Festival festival = parsearLinea(lineaFestival);
                 agenda.addFestival(festival);
-                
+
             }
         } finally {
             if (sc != null) {
                 sc.close();
             }
         }
-        
+
     }
 
     /**
@@ -58,7 +58,7 @@ public class FestivalesIO {
         HashSet<Estilo> estil = new HashSet<>();
         int i = 4;
         while(i<tokens.length){
-            estil.add(Estilo.valueOf(tokens[i].trim()));
+            estil.add(Estilo.valueOf(tokens[i].toUpperCase().trim()));
             i++;
         }
         Festival mifest = new Festival(nom, lug, fechaIn, durac, estil);
