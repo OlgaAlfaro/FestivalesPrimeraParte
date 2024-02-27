@@ -12,24 +12,24 @@ import java.util.Scanner;
 public class FestivalesIO {
 
     
-    public static void cargarFestivales(AgendaFestivales agenda) {
-        Scanner sc = null;
-        try {
-            sc = new Scanner(FestivalesIO.class.
-                    getResourceAsStream("/festivales.csv"));
-            while (sc.hasNextLine()) {
-                String lineaFestival = sc.nextLine();
-                Festival festival = parsearLinea(lineaFestival);
-                agenda.addFestival(festival);
-
-            }
-        } finally {
-            if (sc != null) {
-                sc.close();
-            }
-        }
-
-    }
+//    public static void cargarFestivales(AgendaFestivales agenda) {
+//        Scanner sc = null;
+//        try {
+//            sc = new Scanner(FestivalesIO.class.
+//                    getResourceAsStream("/festivales.csv"));
+//            while (sc.hasNextLine()) {
+//                String lineaFestival = sc.nextLine();
+//                Festival festival = parsearLinea(lineaFestival);
+//                agenda.addFestival(festival);
+//
+//            }
+//        } finally {
+//            if (sc != null) {
+//                sc.close();
+//            }
+//        }
+//
+//    }
 
     /**
      * se parsea la línea extrayendo sus datos y creando y
@@ -41,9 +41,27 @@ public class FestivalesIO {
 
         String[] tokens = lineaFestival.split(":");
         String nom = tokens[0].trim();
-        nom.toUpperCase().charAt(0);
-        int pos = nom.indexOf(" ");
-        nom.toUpperCase().charAt(pos);
+
+//        char c = nom.charAt(0);
+//        char cMayus = Character.toUpperCase(c);
+//        nom.replace(c, cMayus);
+//        int pos = nom.indexOf(" ");
+//        nom.replace(nom.charAt(pos), Character.toUpperCase(nom.charAt(pos)));
+
+//        String[] nombre = nom.split(" ");
+//        for(String minombre: nombre){
+//            char c = minombre.charAt(0);
+//            char cMayus = Cj.toUpperCase()
+//            minombre = minombre.replace(c, );
+//        }
+
+        String[] nombre = nom.split(" ");
+        StringBuilder nomMayus = new StringBuilder();
+        for(String minombre: nombre){
+            String nomM = minombre.substring(0, 1).toUpperCase() + minombre.substring(1).toLowerCase();
+            nomMayus.append(nomM + " ");
+        }
+
 
         String lug = tokens[1].trim().toUpperCase();
 
@@ -61,7 +79,7 @@ public class FestivalesIO {
             estil.add(Estilo.valueOf(tokens[i].toUpperCase().trim()));
             i++;
         }
-        Festival mifest = new Festival(nom, lug, fechaIn, durac, estil);
+        Festival mifest = new Festival(nomMayus.toString(), lug, fechaIn, durac, estil);
 
         return mifest;
     }

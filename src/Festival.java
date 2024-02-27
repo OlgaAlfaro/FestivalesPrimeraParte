@@ -103,7 +103,7 @@ public class Festival {
      */
     public boolean haConcluido() {
 
-        if(fechaInicio.plusDays(duracion-1).isAfter(LocalDate.now())){
+        if(fechaInicio.plusDays(duracion-1).isBefore(LocalDate.now())){
             return true;
         }
         else{
